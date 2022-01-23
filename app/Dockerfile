@@ -1,7 +1,8 @@
 FROM node:14
 
-WORKDIR /todo-api-server
+WORKDIR /app
 COPY package.json .
 RUN npm install
 COPY . .
+# RUN apk add --no-cache bash
 CMD npm start
