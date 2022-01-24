@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import config from "../config/config";
 import { Todo } from "../entity/Todo";
 import { stat } from "fs";
+import { User } from "../entity/User";
 
 class TodoController {
   static addTodo = async (req: Request, res: Response) => {
@@ -59,7 +60,6 @@ class TodoController {
 
       todo.name = name;
       todo.desc = desc;
-      todo.userid = userid;
       todo.status = status;
       todo.deadlineTime = deadlineTime;
       todo.dateModified = now;
@@ -147,6 +147,7 @@ class TodoController {
       console.log(req.user.userId);
       console.log(userIdAssign);
       // Check userId
+      const user = await getRepository(User).findOneOrFail(userIdAssign);
       if (req.user.userId != userIdAssign) {
         todo.userid = userIdAssign;
         todo.dateModified = now;
