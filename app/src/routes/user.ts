@@ -7,6 +7,4 @@ const router = Router();
 //Get all users - API 8
 router.get("/", checkJwt, UserController.listAll)
 
-router.get("/:id", checkJwt, UserController.getOneById)
-
 export default router;

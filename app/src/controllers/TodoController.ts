@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { validate } from "class-validator";
-import * as moment from "moment";
-import * as jwt from "jsonwebtoken";
+import moment from "moment";
+import jwt from "jsonwebtoken";
 import config from "../config/config";
 import { Todo } from "../entity/Todo";
 import { stat } from "fs";
@@ -15,12 +15,10 @@ class TodoController {
       //Get current time
       let date_ob = new Date();
       let date = ("0" + date_ob.getDate()).slice(-2);
-      // current month
-      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-      // current year
-      let year = date_ob.getFullYear();
+      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2); // current month
+      let year = date_ob.getFullYear(); // current year
       let currentDate = date + "-" + month + "-" + year;
-      var now = moment(currentDate, "DD-MM-YYYY").toDate();
+      var now = moment(currentDate, "YYYY-MM-DD").toDate();
 
       let todo = new Todo();
       todo.name = name;
@@ -50,11 +48,21 @@ class TodoController {
           .send("Cannot update this task because it already complete.");
         return;
       }
+
+      //Get current datetime
+      let date_ob = new Date();
+      let date = ("0" + date_ob.getDate()).slice(-2);
+      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2); // current month
+      let year = date_ob.getFullYear(); // current year
+      let currentDate = date + "-" + month + "-" + year;
+      var now = moment(currentDate, "YYYY-MM-DD").toDate();
+
       todo.name = name;
       todo.desc = desc;
       todo.userid = userid;
       todo.status = status;
       todo.deadlineTime = deadlineTime;
+      todo.dateModified = now;
       await getRepository(Todo).save(todo);
 
       res.status(200).json({
@@ -126,18 +134,15 @@ class TodoController {
   static assignToDo = async (req: Request, res: Response) => {
     try {
       const { userIdAssign } = req.body;
-      // const { authorization } = req.headers;
       const todo = await getRepository(Todo).findOne(req.params.id);
 
       //Get current datetime
       let date_ob = new Date();
       let date = ("0" + date_ob.getDate()).slice(-2);
-      // current month
       let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-      // current year
       let year = date_ob.getFullYear();
       let currentDate = date + "-" + month + "-" + year;
-      var now = moment(currentDate, "DD-MM-YYYY").toDate();
+      var now = moment(currentDate, "YYYY-MM-DD").toDate();
 
       console.log(req.user.userId);
       console.log(userIdAssign);

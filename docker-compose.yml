@@ -20,7 +20,7 @@ services:
     build: 
       context: ./app
       dockerfile: ./Dockerfile
-    restart: unless-stopped
+    restart: always
     env_file: ./.env
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT

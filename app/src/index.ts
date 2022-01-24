@@ -1,8 +1,8 @@
 import "reflect-metadata";
 import {createConnection} from "typeorm";
-import * as express from 'express';
-import * as bodyParser from "body-parser";
-import * as cors from "cors";
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
 import routes from "./routes";
 import {User} from "./entity/User";
 import {Todo} from "./entity/Todo";
@@ -17,7 +17,7 @@ createConnection({
     entities: [
         __dirname + "/entity/*.ts"
     ],
-    synchronize: false, // set true if run project at first time, then set to false
+    synchronize: true, // set true if run project at first time, then set to false
     logging: false
 }).then(async connection => {
     const app = express();

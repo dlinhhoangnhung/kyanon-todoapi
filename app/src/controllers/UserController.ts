@@ -16,18 +16,6 @@ class UserController {
       res.status(400).send("Happen error, check and try again. " + error);
     }
   };
-
-  static getOneById = async (req: Request, res: Response) => {
-    try {
-      const user = await getRepository(User).findOneOrFail(req.params.id, {
-        select: ["id", "username", "fullName"],
-      });
-      res.status(200).send(user);
-    } catch (error) {
-      res.status(404).send("Happen error, check and try again. " + error);
-    }
-  };
-  
 }
 
 export default UserController;
