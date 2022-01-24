@@ -18,5 +18,9 @@ Sử dụng: MySql Workbench, Docker, Postman
     database: kyanon
     
 Database 'Kyanon' có 2 table: user, todo
+
++ Test API: 
+- file postman
+- file docx chứa screenshot kết quả
 #######################################################################
 

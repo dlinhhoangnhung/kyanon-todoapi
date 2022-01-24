@@ -1,11 +1,9 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
-import { validate } from "class-validator";
 import moment from "moment";
 import jwt from "jsonwebtoken";
 import config from "../config/config";
 import { Todo } from "../entity/Todo";
-import { stat } from "fs";
 import { User } from "../entity/User";
 
 class TodoController {
@@ -41,7 +39,7 @@ class TodoController {
 
   static updateTodo = async (req: Request, res: Response) => {
     try {
-      const { name, desc, deadlineTime, status, userid } = req.body;
+      const { name, desc, deadlineTime, status } = req.body;
       let todo = await getRepository(Todo).findOneOrFail(req.params.id);
       if (todo.status === "complete") {
         res
