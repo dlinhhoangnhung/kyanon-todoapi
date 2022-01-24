@@ -1,4 +1,4 @@
-1. Deploy source code ở local PC
+Deploy source code ở local PC
 Sử dụng: MySql Workbench, Docker, Postman
 
 + Chạy lệnh sau để build image, run container, khởi động server Nodejs:
@@ -10,14 +10,17 @@ Sử dụng: MySql Workbench, Docker, Postman
     *nếu xuất hiện lỗi từ DB, vd: ..todo/user already exist..
     -> vào file index.ts, sửa: "synchronize": "true" -> "false"
             
-+ Kết nối với MySql Workbench ở port 3307
-Chọn Database -> Connect to Database -> Nhập Port : 3307 
-    username: root
-    password: root1234
++ Kết nối với MySql Workbench ở 
+    host: localhost
+    port:  3307
+    username: root,
+    password: root1234,
+    database: kyanon
+    
 Database 'Kyanon' có 2 table: user, todo
 #######################################################################
 
-+ Tiến hành test API không qua dữ liệu mẫu. Token hết hạn sau 3h.
++ Bắt đầu test API. Token hết hạn sau 3h.
 
     1. SIGN UP
     POST: localhost:3000/auth/sign-up
